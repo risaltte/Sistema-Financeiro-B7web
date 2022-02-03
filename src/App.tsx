@@ -1,25 +1,75 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react"
+import * as C from "./App.styles";
+import { Item } from "./types/Item";
+import { items } from "./data/items";
+import { getCurrentMonth, getListByMonth } from "./helpers/dateFilter"
+import { TableArea } from "./components/TableArea";
+import { InfoArea } from "./components/InfoArea";
+import { categories } from "./data/categories";
+import { InputArea } from "./components/InputArea";
 
-function App() {
+import logoImg from "./assets/images/logo.png";
+
+const App = () => {
+  const [list, setList] = useState(items);
+  const [filteredlist, setFilteredList] = useState<Item[]>([]);
+  const [currentMonth, setCurrenteMonth] = useState(getCurrentMonth());
+  const [income, setIncome] = useState(0);
+  const [expense, setExpense] = useState(0);
+
+  useEffect(() => {
+    setFilteredList(getListByMonth(list, currentMonth));
+  }, [list, currentMonth]);
+
+  useEffect(() => {
+    let totalIncome = 0;
+    let totalExpense = 0;
+
+    for (let i in filteredlist) {
+      if (categories[filteredlist[i].category].expense) {
+        totalExpense += filteredlist[i].value;
+      } else {
+        totalIncome += filteredlist[i].value;
+      }      
+    }
+
+    setIncome(totalIncome);
+    setExpense(totalExpense);
+    
+  }, [filteredlist]);
+
+  const handleMonthCange = (newMonth: string) => {
+    setCurrenteMonth(newMonth);
+  };
+
+  const handleAddItem = (item: Item) => {
+    console.log("fui chamado");
+    let newList = [...list];
+    newList.push(item);
+    
+    setList(newList);
+  }  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <C.Container>
+      <C.Header>
+        <C.Logo src={logoImg} alt="Logo"></C.Logo>
+        <C.HeaderText>Sistema Financeiro</C.HeaderText>
+      </C.Header>
+
+      <C.Body>
+        <InfoArea 
+          currentMonth={currentMonth} 
+          onMonthChange={handleMonthCange}
+          income={income}
+          expense={expense}
+        />
+
+        <InputArea onAdd={handleAddItem}/>
+        
+        <TableArea items={filteredlist}/>
+      </C.Body>
+    </C.Container>
   );
 }
 
