@@ -19,3 +19,19 @@ export const Category = styled.div<{ color: string }>`
 export const Value = styled.div<{ color: string }>`
     color: ${props => props.color};
 `;
+
+export const ButtunAction = styled.button`
+    background: transparent;
+    border: none;
+    cursor: pointer;    
+
+    transition: filter 0.2s;
+
+    &:hover {
+        filter: brightness(0.9);
+    }
+    
+    img {
+        width: 28px;
+    }
+`;

@@ -7,6 +7,7 @@ import { TableArea } from "./components/TableArea";
 import { InfoArea } from "./components/InfoArea";
 import { categories } from "./data/categories";
 import { InputArea } from "./components/InputArea";
+import { v4 as uuid } from "uuid";
 
 import logoImg from "./assets/images/logo.png";
 
@@ -43,12 +44,19 @@ const App = () => {
   };
 
   const handleAddItem = (item: Item) => {
-    console.log("fui chamado");
     let newList = [...list];
+
+    item.id = uuid();
     newList.push(item);
     
     setList(newList);
-  }  
+  }
+  
+  const handleDeleteItem = (item: Item) => {
+    let updatedList = list.filter(listItem => listItem.id !== item.id); 
+
+    setList(updatedList);
+  }
 
   return (
     <C.Container>
@@ -67,7 +75,10 @@ const App = () => {
 
         <InputArea onAdd={handleAddItem}/>
         
-        <TableArea items={filteredlist}/>
+        <TableArea 
+          items={filteredlist}
+          onDeleteItem={handleDeleteItem}
+        />
       </C.Body>
     </C.Container>
   );
