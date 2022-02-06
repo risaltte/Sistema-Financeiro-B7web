@@ -1,13 +1,11 @@
-import { Item } from "../../types/Item";
+import { useContext } from "react";
+import { ItemsContext } from "../../ItemsContext";
 import { TableItem } from "../TableItem";
 import * as C from "./styles";
 
-type Props = {
-    items: Item[];
-    onDeleteItem: (item: Item) => void;
-};
+export const TableArea = () => {
+    const { filteredList } = useContext(ItemsContext);
 
-export const TableArea = ({items, onDeleteItem}: Props) => {
     return (
         <C.Table>
             <thead>
@@ -20,11 +18,10 @@ export const TableArea = ({items, onDeleteItem}: Props) => {
                 </tr>
             </thead>
             <tbody>
-                {items.map((item, index) => (
+                {filteredList.map((item, index) => (
                     <TableItem 
                         key={index} 
                         item={item}
-                        onDeleteItem={onDeleteItem}
                     />
                 ))}
             </tbody>

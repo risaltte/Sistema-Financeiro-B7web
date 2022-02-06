@@ -1,18 +1,17 @@
 import { Item } from "../../types/Item";
 import * as C from "./styles";
 import { categories } from "../../data/categories";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { getDateFromString } from "../../helpers/dateFilter"
+import { ItemsContext } from "../../ItemsContext";
 
-type Props = {
-    onAdd: (item: Item) => void;
-}
-
-export const InputArea = ({ onAdd }: Props) => {
+export const InputArea = () => {
     const [date, setDate] = useState('');
     const [category, setCategory] = useState('');
     const [title, setTitle] = useState('');
     const [value, setValue] = useState(0);
+
+    const { createItem } = useContext(ItemsContext);
 
     const handleAddItem = (event: FormEvent) => {
         event.preventDefault();
@@ -21,7 +20,7 @@ export const InputArea = ({ onAdd }: Props) => {
             return;
         }
 
-        onAdd({
+        createItem({
             date: getDateFromString(date),
             category,
             title,
@@ -67,7 +66,6 @@ export const InputArea = ({ onAdd }: Props) => {
                         type="date"
                         value={date}
                         onChange={event => setDate(event.target.value)}
-                        //required
                     />
                 </C.FormGroup>
 
@@ -77,7 +75,6 @@ export const InputArea = ({ onAdd }: Props) => {
                         name="category"
                         value={category} 
                         onChange={event => setCategory(event.target.value)}
-                        //required
                     >
                         <option                             
                             disabled
@@ -98,7 +95,6 @@ export const InputArea = ({ onAdd }: Props) => {
                         type="text" 
                         value={title}
                         onChange={event => setTitle(event.target.value)}
-                        //required
                     />
                 </C.FormGroup>
 
@@ -108,7 +104,6 @@ export const InputArea = ({ onAdd }: Props) => {
                         type="number"
                         value={value}
                         onChange={event => setValue(Number(event.target.value))} 
-                        //required
                     />
                 </C.FormGroup>
 

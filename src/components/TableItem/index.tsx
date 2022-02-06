@@ -5,16 +5,15 @@ import { categories } from "../../data/categories";
 import { formatMoneyBr } from "../../helpers/formatNumbers"
 
 import trashImg from "../../assets/images/trash.png";
+import { useContext } from "react";
+import { ItemsContext } from "../../ItemsContext";
 
 type Props = {
     item: Item;
-    onDeleteItem: (item: Item) => void;
 }
 
-export const TableItem = ({ item, onDeleteItem }: Props) => {
-    const handleDeleteIntem = (item: Item) => {
-        onDeleteItem(item);        
-    }
+export const TableItem = ({ item }: Props) => {
+    const { deleteItem } = useContext(ItemsContext);
 
     return (
         <C.TableLine>
@@ -33,7 +32,7 @@ export const TableItem = ({ item, onDeleteItem }: Props) => {
             <C.TableColumn>
                 <C.ButtunAction
                     type="button"
-                    onClick={() => handleDeleteIntem(item)}
+                    onClick={() => deleteItem(item)}
                 >
                     <img src={trashImg} alt="Deletar" />
                 </C.ButtunAction>

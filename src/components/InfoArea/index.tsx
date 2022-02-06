@@ -1,27 +1,24 @@
 import * as C from "./styles";
 import { formatCurrentMonth } from "../../helpers/dateFilter"; 
 import { ResumeItem } from "../ResumeItem";
+import { useContext } from "react";
+import { ItemsContext } from "../../ItemsContext";
 
-type Props = {
-    currentMonth: string;
-    onMonthChange: (newMonth: string) => void;
-    income: number;
-    expense: number;
-};
+export const InfoArea = () => {
+    const {currentMonth, monthChange, income, expense} = useContext(ItemsContext);
 
-export const InfoArea = ({ currentMonth, onMonthChange, income, expense }: Props) => {
     const onHandlePrevMonth = () => {
         let [year, month] = currentMonth.split('-');
         let currentDate = new Date(parseInt(year), parseInt(month) -1, 1);
         currentDate.setMonth(currentDate.getMonth() - 1);
-        onMonthChange(`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}`);
+        monthChange(`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}`);
     }
 
     const onHandleNextMonth = () => {
         let [year, month] = currentMonth.split('-');
         let currentDate = new Date(parseInt(year), parseInt(month) - 1, 1);
         currentDate.setMonth(currentDate.getMonth() + 1);
-        onMonthChange(`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}`);
+        monthChange(`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}`);
     }
 
     return (
