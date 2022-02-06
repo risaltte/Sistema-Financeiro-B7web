@@ -4,6 +4,9 @@ import { InfoArea } from "./components/InfoArea";
 import { InputArea } from "./components/InputArea";
 import { ItemsProvider } from "./hooks/useItems";
 
+import {ToastContainer} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
+
 import logoImg from "./assets/images/logo.png";
 
 const App = () => {
@@ -23,6 +26,10 @@ const App = () => {
           <TableArea />
         </C.Body>
       </C.Container>
+      <ToastContainer 
+        autoClose={5000}
+        theme={"dark"}
+      />
     </ItemsProvider>
   );
 }

@@ -3,6 +3,13 @@ import { categories } from "../../data/categories";
 import { FormEvent, useState } from "react";
 import { getDateFromString } from "../../helpers/dateFilter"
 import { useItems } from "../../hooks/useItems";
+import { toast } from "react-toastify";
+
+interface ValidateFormError {
+    success: boolean;
+    id: string;
+    message: string;
+}
 
 export const InputArea = () => {
     const [date, setDate] = useState('');
@@ -15,7 +22,13 @@ export const InputArea = () => {
     const handleAddItem = (event: FormEvent) => {
         event.preventDefault();
 
-        if (!validatedForm()) {
+        const resultValidatedForm = validatedForm();
+
+        if (!resultValidatedForm.success) {
+            toast.error(resultValidatedForm.message, {
+                toastId: resultValidatedForm.id
+            });
+
             return;
         }
 
@@ -29,24 +42,44 @@ export const InputArea = () => {
         clearForm();
     };
 
-    const validatedForm = (): boolean => {
+    const validatedForm = (): ValidateFormError => {
         if (date === '') {
-            return false;
+            return {
+                success: false,
+                id: 'invalid-date',
+                message: '📅 Data inválida.'
+            };
         }
 
         if (category === '') {
-            return false;
+            return {
+                success: false,
+                id: 'invalid-category',
+                message: '🏷️ Categoria inválida.'
+            };
         }
 
         if (title === '') {
-            return false;
+            return {
+                success: false,
+                id: 'invalid-title',
+                message: '✏️ O título não pode ser vazio.'
+            };
         }
 
         if (value <= 0) {
-            return false;
+            return {
+                success: false,
+                id: 'invalid-value',
+                message: '💰 O valor precisa ser maior que zero.'
+            };
         }
 
-        return true;
+        return {
+            success: true,
+            id: 'valid-form',
+            message: 'Dados do formulário validados.'
+        };
     };
 
     const clearForm = (): void => {
