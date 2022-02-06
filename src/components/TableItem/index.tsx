@@ -5,15 +5,14 @@ import { categories } from "../../data/categories";
 import { formatMoneyBr } from "../../helpers/formatNumbers"
 
 import trashImg from "../../assets/images/trash.png";
-import { useContext } from "react";
-import { ItemsContext } from "../../ItemsContext";
+import { useItems } from "../../hooks/useItems";
 
 type Props = {
     item: Item;
 }
 
 export const TableItem = ({ item }: Props) => {
-    const { deleteItem } = useContext(ItemsContext);
+    const { deleteItem } = useItems();
 
     return (
         <C.TableLine>

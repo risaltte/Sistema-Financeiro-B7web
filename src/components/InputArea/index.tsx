@@ -1,9 +1,8 @@
-import { Item } from "../../types/Item";
 import * as C from "./styles";
 import { categories } from "../../data/categories";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 import { getDateFromString } from "../../helpers/dateFilter"
-import { ItemsContext } from "../../ItemsContext";
+import { useItems } from "../../hooks/useItems";
 
 export const InputArea = () => {
     const [date, setDate] = useState('');
@@ -11,7 +10,7 @@ export const InputArea = () => {
     const [title, setTitle] = useState('');
     const [value, setValue] = useState(0);
 
-    const { createItem } = useContext(ItemsContext);
+    const { createItem } = useItems();
 
     const handleAddItem = (event: FormEvent) => {
         event.preventDefault();

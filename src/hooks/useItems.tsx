@@ -1,8 +1,8 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
-import { items } from "./data/items";
-import { categories } from "./data/categories";
-import { getCurrentMonth, getListByMonth } from "./helpers/dateFilter";
-import { Item } from "./types/Item";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { items } from "../data/items";
+import { categories } from "../data/categories";
+import { getCurrentMonth, getListByMonth } from "../helpers/dateFilter";
+import { Item } from "../types/Item";
 import { v4 as uuid } from "uuid";
 
 type ItemInput = Omit<Item, 'id'>;
@@ -22,7 +22,7 @@ interface ItemsContextData {
     monthChange: (newMonth: string) => void;
 }
 
-export const ItemsContext = createContext<ItemsContextData>(
+const ItemsContext = createContext<ItemsContextData>(
     {} as ItemsContextData
 );
 
@@ -86,4 +86,11 @@ export function ItemsProvider({ children }: ItemProviderProps) {
             { children }
         </ItemsContext.Provider>
     );
+}
+
+// hook
+export function useItems() {
+    const context = useContext(ItemsContext);
+
+    return context;
 }

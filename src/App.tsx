@@ -2,7 +2,7 @@ import * as C from "./App.styles";
 import { TableArea } from "./components/TableArea";
 import { InfoArea } from "./components/InfoArea";
 import { InputArea } from "./components/InputArea";
-import { ItemsProvider } from "./ItemsContext";
+import { ItemsProvider } from "./hooks/useItems";
 
 import logoImg from "./assets/images/logo.png";
 

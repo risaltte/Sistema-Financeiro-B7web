@@ -1,10 +1,9 @@
-import { useContext } from "react";
-import { ItemsContext } from "../../ItemsContext";
+import { useItems } from "../../hooks/useItems";
 import { TableItem } from "../TableItem";
 import * as C from "./styles";
 
 export const TableArea = () => {
-    const { filteredList } = useContext(ItemsContext);
+    const { filteredList } = useItems();
 
     return (
         <C.Table>

@@ -1,11 +1,10 @@
 import * as C from "./styles";
 import { formatCurrentMonth } from "../../helpers/dateFilter"; 
 import { ResumeItem } from "../ResumeItem";
-import { useContext } from "react";
-import { ItemsContext } from "../../ItemsContext";
+import { useItems } from "../../hooks/useItems";
 
 export const InfoArea = () => {
-    const {currentMonth, monthChange, income, expense} = useContext(ItemsContext);
+    const {currentMonth, monthChange, income, expense} = useItems();
 
     const onHandlePrevMonth = () => {
         let [year, month] = currentMonth.split('-');
