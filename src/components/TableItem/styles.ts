@@ -1,11 +1,35 @@
 import styled from "styled-components";
 
 export const TableLine = styled.tr`
+    transition: filter 0.2s;
 
+    // elementos filhos impares
+    &:nth-child(odd) {
+        background: #F0D2F7;
+    }
+
+    // elementos filhos pares
+    &:nth-child(even) {
+        background: #F7EBF8;
+    }
+
+    &:hover {
+        filter: brightness(0.95);        
+    }
 `;
 
 export const TableColumn = styled.td`
-    padding: 0 10px;
+    padding: 4px 10px;
+
+    &:first-child {
+        border-top-left-radius: 10px; 
+        border-bottom-left-radius: 10px;
+    }
+
+    &:last-child {
+        border-bottom-right-radius: 10px; 
+        border-top-right-radius: 10px; 
+    }
 `;
 
 export const Category = styled.div<{ color: string }>`
