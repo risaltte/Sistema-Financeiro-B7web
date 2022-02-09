@@ -8,6 +8,12 @@ export const Table = styled.table`
     box-shadow: 0px 0px 5px #ccc;
     border-radius: 10px;
     margin-top: 20px;
+
+    @media (max-width: 576px) {
+        thead{
+            display: none;
+        };
+    }
 `;
 
 export const TableHeadColum = styled.th<{width?: number}>`

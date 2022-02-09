@@ -5,16 +5,20 @@ export const TableLine = styled.tr`
 
     // elementos filhos impares
     &:nth-child(odd) {
-        background: #F0D2F7;
+        background: #eee;
     }
 
     // elementos filhos pares
     &:nth-child(even) {
-        background: #F7EBF8;
+        background: #fafcfa;
     }
 
     &:hover {
         filter: brightness(0.95);        
+    }
+
+    @media (max-width: 576px) {
+        
     }
 `;
 
@@ -29,6 +33,19 @@ export const TableColumn = styled.td`
     &:last-child {
         border-bottom-right-radius: 10px; 
         border-top-right-radius: 10px; 
+    }
+
+    @media (max-width: 576px) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        padding: 10px 15px;
+
+        &:before {
+            content: attr(data-title);
+            font-weight: bold;
+        }      
     }
 `;
 

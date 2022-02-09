@@ -2,6 +2,16 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     flex: 1;
+
+    @media (max-width: 576px) {
+        box-sizing: border-box;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        box-shadow: 0px 0px 5px #bbb;
+        padding: 20px;
+        border-radius: 10px
+    }
 `;
 
 export const Title = styled.div`

@@ -16,19 +16,19 @@ export const TableItem = ({ item }: Props) => {
 
     return (
         <C.TableLine>
-            <C.TableColumn>{formatDate(item.date)}</C.TableColumn>
-            <C.TableColumn>
+            <C.TableColumn data-title={"Data"}>{formatDate(item.date)}</C.TableColumn>
+            <C.TableColumn data-title={"Categoria"}>
                 <C.Category color={categories[item.category].color}>
                     {categories[item.category].title}               
                 </C.Category>
             </C.TableColumn>                
-            <C.TableColumn>{item.title}</C.TableColumn>
-            <C.TableColumn>
+            <C.TableColumn data-title={"Título"}>{item.title}</C.TableColumn>
+            <C.TableColumn data-title={"Valor"}>
                 <C.Value color={categories[item.category].expense ? 'red' : 'green'}>
                     {formatMoneyBr(item.value)}
                 </C.Value>
             </C.TableColumn>
-            <C.TableColumn>
+            <C.TableColumn data-title={"Ações"}>
                 <C.ButtunAction
                     type="button"
                     onClick={() => deleteItem(item)}

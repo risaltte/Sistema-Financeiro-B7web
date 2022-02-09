@@ -7,6 +7,7 @@ export const Container = styled.div`
 export const Header = styled.div`
     background: darkblue;
     height: 180px;
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,4 +29,7 @@ export const Body = styled.div`
     margin: auto;
     max-width: 980px;
     margin-bottom: 60px;
+
+    padding: 0 20px;
+    
 `;

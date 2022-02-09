@@ -31,6 +31,24 @@ export const Container = styled.div`
             filter: brightness(0.9);
         }
     }
+
+    @media (max-width: 576px) {
+        box-sizing: border-box;
+        width: auto;
+
+        form {
+            box-sizing: border-box;
+            width: 100%;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        button {
+            margin: auto;
+            width: 100%;
+        }
+    }
 `;
 
 export const FormGroup = styled.div`
@@ -65,4 +83,19 @@ export const FormGroup = styled.div`
         padding: 4px;
         font-size: 15px;
     }
+
+    @media (max-width: 576px) {
+        box-sizing: border-box;
+        width: 100%;
+
+        input {
+            width: calc(100% - 8px); // 8px padding
+            height: 25px;
+        }
+
+        select {
+            width: 100%;
+            height: 35px;
+        }
+    }   
 `;
