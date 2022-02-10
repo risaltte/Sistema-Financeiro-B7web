@@ -26,8 +26,28 @@ const ItemsContext = createContext<ItemsContextData>(
     {} as ItemsContextData
 );
 
+const LOCAL_STORAGE_KEY = '@Risaltte:bw7Finances';
+
 export function ItemsProvider({ children }: ItemProviderProps) {
-    const [list, setList] = useState(items);
+    const [list, setList] = useState<Item[]>(() => {
+        
+        const storagedItems = localStorage.getItem(LOCAL_STORAGE_KEY);
+
+        if (storagedItems) {
+            // reviver Optional parameter JSON.parse
+            // parameter reviver is a function that transforms string date in a Date object.
+            return JSON.parse(storagedItems, (key, value) => {
+                if (key === 'date') {
+                    return new Date(value);
+                } else {
+                    return value;
+                }
+            });
+        }
+
+        return items;
+    });
+
     const [filteredList, setFilteredList] = useState<Item[]>([]);
     const [currentMonth, setCurrenteMonth] = useState(getCurrentMonth());
     const [income, setIncome] = useState(0);
@@ -73,12 +93,16 @@ export function ItemsProvider({ children }: ItemProviderProps) {
         newList.push(newItem);
 
         setList(newList);
+
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newList));
     }
 
     const deleteItem = (item: Item) => {
         let updatedList = list.filter(listItem => listItem.id !== item.id);
 
         setList(updatedList);
+
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedList));
     }
 
     return(
